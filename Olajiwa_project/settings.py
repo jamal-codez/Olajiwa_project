@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Olajiwa_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default="postgresql://postgres:PtCjP7UiPZZJa4UaOi5E@containers-us-west-209.railway.app:5642/railway", conn_max_age=1800)
+    'default': dj_database_url.config(default="postgres:PtCjP7UiPZZJa4UaOi5E@containers-us-west-209.railway.app:5642/railway", conn_max_age=1800)
 }
 
 # Password validation
