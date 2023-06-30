@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLAJIWA RESOURCE COMPANY </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html" class="tit">OLAJIWA'S</a>
+            </div>
+            <nav>
+                <ul id="menu-items">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Portfolio</a></li>
+                    <li><a href="">Add Customer</a></li>
+                    <li><a href="">Update Inventory</a></li>
+                    <li>
+                        <div class="logout"><a href="account.html">logout</a></div>
+                    </li>
+
+                </ul>
+            </nav>
+            <img src="menu.png" class="menu-icon" onclick="menutoggle()" id="toggler">
+        </div>
+    </div>
+
+    <!--account page-->
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col2">
+                    <h1 style="color: aliceblue;"><span
+                            style="color: rgb(9, 59, 221);font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">OLAGJIWA</span>
+                        RESOURCE COMPANY </h1>
+                    <p> Suppliers of Cement, Granite, Gravel, Sand, Latrace, Oil, Stonedust, General Merchant etc</p>
+
+                </div><br>
+
+                <div class="form-container" id="form_container">
+                    <div class="form-btn">
+                        <span onclick="login()">LOGIN</span>
+                        <!--<span onclick="register()">Register</span>-->
+                        <hr id="indicator">
+                    </div>
+                    <form id="LoginForm">
+                        <input type="text" name="" placeholder="ID">
+                        <input type="password" name="" placeholder="Password">
+                        <button type="submit" class="btn">LogIn</button>
+                        <a href="">Forgot Password</a>
+                    </form>
+
+                    <!--<form id="RegForm">
+                        <input type="text" name="" placeholder="UserName">
+                        <input type="text" name="" placeholder="First name">
+                        <input type="text" name="" placeholder="Second Name">
+                        <input type="Email" name="" placeholder="Email">
+                        <input type="password" name="" placeholder="Password">
+                        <input type="password" name="" placeholder="Confirm Password">
+                        <input type="number" name="" placeholder="phone number">
+                        <button type="submit" class="btn">Register</button>
+                    </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <br>
+                    <h3>HEAD OFFICE</h3>
+                    <p>Opposite Bovas Filling Station,</p>
+                    <p>Oke-Panu, Omi-Adio,</p>
+                    <p>Ibadan Nigeria</p>
+                </div>
+                <div class="footer-col-2">
+                    <br>
+                    <h2> C.E.O</h2>
+                    <p>ABDULQADIR QOUBLAHA</p>
+                </div>
+                <div class="footer-col-3">
+                    <br>
+                    <h3>CONTACT US:</h3>
+                    <ul>
+                        <li>08068989999</li>
+                        <li>08028779541</li>
+                        <li>08050897272</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <br>
+                    <h3>BRANCH OFFICE</h3>
+                    <p>- Alhaji Ajibike Shopping complex, Beside Bovas Filling Station</p>
+                    <p>- Yaa Lateef Filling Station, Along Abeokuta Road, Omi-Adio, Ibadan</p>
+                    <p>- Apooyin Ido Road, Ibadan</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright" style="margin-top: 7px;">Copyright 2023 - JAMAL ENTERPRISE</p>
+        </div>
+    </footer>
+    <!---js for toggle menu--->
+    <script type="text/javascript">
+        var MenuItems = document.getElementById("menu-items");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+        }
+    </script>
+    <!--js for toggle form-->
+    <!--<script type="text/javascript">
+        var LoginForm = document.getElementById("LoginForm");
+        var RegForm = document.getElementById("RegForm");
+        var Indicator = document.getElementById("indicator");
+        var form_container = document.getElementById("form_container");
+        function register() {
+            RegForm.style.transform = "translateX(0px)";
+            LoginForm.style.transform = "translateX(0px)"
+            Indicator.style.transform = "translateX(100px)"
+            form_container.style.height = "550px"
+        }
+        function login() {
+            RegForm.style.transform = "translateX(300px)";
+            LoginForm.style.transform = "translateX(300px)"
+            Indicator.style.transform = "translateX(0px)"
+            form_container.style.height = "300px"
+        }
+    </script>-->
+</body>

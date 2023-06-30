@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load price_filter %}
+    {% load date_filters %}
+    {% load dict_filter %}
+    <title>OLAJIWA STOCK CARD </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'logo2.png' %}"></a>
+            </div>
+            <nav>
+                <ul id="menu-items">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'addc' %}">Add Customer</a></li>
+                    <li><a href="{% url 'c_list' %}">All Customers</a></li>
+                    <li><a href="">Update Inventory</a></li>
+                    <li>
+                        <div class="logout"><a href="{% url 'logout' %}">logout</a></div>
+                    </li>
+                </ul>
+            </nav>
+            <img src="{% static 'menu.png' %}" class="menu-icon" onclick="menutoggle()" id="toggler">
+        </div>
+    </div>
+    <hr>
+
+    <div class="c_info">
+        <h1>{{cos.id}} - {{cos.name}} </h1>
+    </div>
+    <div class="s_card">
+        <h3>STOCK CARD</h3>
+    </div>
+    <div class="stock_search">
+        <form class="stock_search_form">
+            <input type="text" name="search" placeholder="Search Database" required style="font-style: italic;">
+            <button><i class="fa fa-search" style="font-size: 18px;"></i></button>
+
+        </form>
+    </div>
+    <div class="table_content">
+        {% for m in months %}
+        <div class="table_months">
+            <h3> {{m}} , 2023</h3>
+        </div>
+        <div class="stock_table">
+
+            <table class="r_table" id="table1">
+                <tr>
+                    <th>DATE</th>
+                    <th>PRODUCT</th>
+                    <th>NO. OF ORDER</th>
+                    <th>AMOUNT </th>
+                    <th>ADVANCE</th>
+                    <th>BALANCE</th>
+                    <th>OUTSTANDING</th>
+                    <th>TOTAL PAID</th>
+                    <th>M.OF PAYMENT</th>
+                </tr>
+                {% for x in stock %}
+                {% if x.date|date_format:"%B" == m %}
+                <tr>
+                    <td>{{x.date|date_format:"%d/%m/%y"}}</td>
+                    <td>{{x.item}}</td>
+                    <td>{{x.order}}</td>
+                    <td>N {{x.amount|f_price}}</td>
+                    <td>N {{x.advance|f_price}}</td>
+                    <td>N {{x.balance|f_price}}</td>
+                    <td>N {{x.outstanding|f_price}}</td>
+                    <td>N {{x.total_p|f_price}}</td>
+                    <td>{{x.means_of_Pay}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+
+                <!--<tr>
+                    <td>Tuesday, 3rd</td>
+                    <td>Dangote Cement</td>
+                    <td>132</td>
+                    <td>N 587,400</td>
+                    <td>N 200,000</td>
+                    <td>N 387,000</td>
+                    <td>N 87,000</td>
+                    <td>N 500,000</td>
+                    <td>Cash</td>
+                </tr>-->
+                <tr>
+                    {% with n_value=r_months|get_value:m %}
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>= N {{n_value.0|f_price}}</td>
+                    <td></td>
+                    <td>= N {{n_value.1|f_price}}</td>
+                    <td>= N {{n_value.2|f_price}}</td>
+                    {% endwith %}
+                </tr>
+            </table>
+
+
+        </div>
+        {% endfor %}
+        <br>
+        <div class="stock_table" id="table1">
+            <table class="r_table">
+                <tr id="f_input" style="display: none;">
+                    <form action="{% url 'cstock_reg' cos.id %}" method="POST">
+                        {% csrf_token %}
+                        <td><input type="date" name="fdata1" placeholder="Date"></td>
+                        <td><select name="fdata2">
+                                <option value="" disabled selected hidden>Select Item</option>
+                                {% for i in it %}
+                                <option value="{{i.name}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><input type="text" name="fdata3" placeholder="Order"></td>
+                        <!--<td><input type="text" name="fdata4" placeholder="Amount"></td>-->
+                        <td></td>
+                        <td><input type="text" name="fdata5" placeholder="Advance"></td>
+                        <!--<td><input type="text" name="fdata6" placeholder="Balance"></td>-->
+                        <td></td>
+                        <td><input type="text" name="fdata7" placeholder="Outstanding"></td>
+                        <!--<td><input type="text" name="fdata8" placeholder="Total"></td>-->
+                        <td></td>
+                        <td><input type="text" name="fdata9" placeholder="Means"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <button id="f_btn" type="submit" class="add_btn" style="display: none;">Register</button>
+    </form>
+    <!--<div class="table_content">
+        <div class="table_months">
+            <h3>Febuary, 2023</h3>
+        </div>
+        <div class="stock_table">
+            <table class="r_table" id="table2">
+                <tr>
+                    <th>DATE</th>
+                    <th>PRODUCT</th>
+                    <th>NO. OF ORDER</th>
+                    <th>AMOUNT </th>
+                    <th>ADVANCE</th>
+                    <th>BALANCE</th>
+                    <th>OUTSTANDING</th>
+                    <th>TOTAL PAID</th>
+                    <th>MEANS OF PAYMENT</th>
+                </tr>-->
+
+    <button class="add_btn" onclick="add()"> Add Record </button>
+    <div class="total_c">
+        <h3>TOTAL ADVANCEMENT : <span style="color: rgb(13, 163, 13);">N {{stat.advance}}</span></h3>
+        <h3>TOTAL OUTSTANDING : <span style="color: rgb(226, 21, 21);">N {{stat.out}}</span></h3>
+        <h3>TOTAL PAID : <span style="color: rgb(66, 12, 190);">N {{stat.paid}}</span></h3>
+    </div>
+
+    <!--- footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <br>
+                    <h3>HEAD OFFICE</h3>
+                    <p>Opposite Bovas Filling Station,</p>
+                    <p>Oke-Panu, Omi-Adio,</p>
+                    <p>Ibadan Nigeria</p>
+                </div>
+                <div class="footer-col-2">
+                    <br>
+                    <h2> C.E.O</h2>
+                    <p>OLARINDE WAHEED AJIBADE</p>
+                </div>
+                <div class="footer-col-3">
+                    <br>
+                    <h3>CONTACT US:</h3>
+                    <ul>
+                        <li>08068989999</li>
+                        <li>08028779541</li>
+                        <li>08050897272</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <br>
+                    <h3>BRANCH OFFICE</h3>
+                    <p>- Alhaji Ajibike Shopping complex, Beside Bovas Filling Station</p>
+                    <p>- Yaa Lateef Filling Station, Along Abeokuta Road, Omi-Adio, Ibadan</p>
+                    <p>- Apooyin Ido Road, Ibadan</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright" style="margin-top: 7px;">Copyright 2023 - JAMAL ENTERPRISE</p>
+        </div>
+    </footer>
+    <!---js for toggle menu--->
+    <script type="text/javascript">
+        var MenuItems = document.getElementById("menu-items");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+        }
+
+        function add() {
+            var row = document.getElementById("f_input");
+            var btn = document.getElementById("f_btn");
+            row.style.display = "table-row";
+            btn.style.display = "inline";
+        }
+
+        function addrec() {
+            var table1 = document.getElementById("table1");
+            var newrow = table1.insertRow(1);
+
+            for (var i = 0; i < 9; i++) {
+                var cell = newrow.insertCell();
+                var input = document.createElement("input");
+                if (i === 3 || i === 5 || i === 7) {
+                    input.type = "hidden";
+                } else if (i === 0) {
+                    input.type = "date";
+                }
+                else {
+                    input.type = "text";
+                }
+                input.id = "input" + (i + 1);
+                cell.appendChild(input);
+            }
+
+            var hbtn = document.getElementById("hbtn");
+            hbtn.style.display = "block";
+        }
+
+        function reg() {
+            var form = document.createElement("form");
+            form.action = "."
+            form.method = "POST";
+            var table1 = document.getElementById("table1");
+            var rows = table1.getElementsByTagName("tr");
+            var drow = rows[-1].getElementsByTagName("td");
+            for (var i = 0; i < 9; i++) {
+                var fdata = document.createElement("input");
+                fdata.type = "hidden";
+                fdata.name = "fdata" + (i + 1);
+                fdata.value = drow[i].querySelector("input").value;
+                form.appendChild(fdata);
+            }
+            document.body.appendChild(form);
+            form.submit();
+
+
+        }
+    </script>
+</body>

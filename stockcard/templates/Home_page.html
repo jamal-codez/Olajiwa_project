@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>OLAJIWA RESOURCE COMPANY </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'logo2.png' %}"></a>
+            </div>
+            <nav>
+                <ul id="menu-items">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'addc' %}">Add Customer</a></li>
+                    <li><a href="{% url 'c_list' %}">All Customers</a></li>
+                    <li><a href="">Update Inventory</a></li>
+
+                    <li>
+                        <div class="logout"><a href="{% url 'logout' %}">logout</a></div>
+                    </li>
+                </ul>
+            </nav>
+            <img src="{% static 'menu.png' %}" class="menu-icon" onclick="menutoggle()" id="toggler">
+        </div>
+    </div>
+    <hr>
+    <div class="h_page">
+        <h1>Welcome {{user.username}} ...</h1>
+        <div class="search">
+            <form class="search_form" action="." method="POST">
+                {% csrf_token %}
+                <input type="text" name="search" placeholder="Search customer ID or name" required><br>
+                <button type="submit" class="search_btn">Search</button>
+            </form>
+            {% if results != None %}
+            <ul>
+                {% for result in results %}
+                <li><a href="{% url 'cstock' result.id %}"
+                        style="color: rgb(17, 18, 129); font-weight: bolder;">{{result.id }} -
+                        {{result.name}}</a></li>
+                <!-- Replace with your desired field(s) -->
+                {% empty %}
+                <li style="color: red;">No results found !!!</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <!--<div class="container">
+            <div class="row">
+                <div class="t_order">
+                    <h3>TODAYS ORDERS</h3>
+                    <ul>
+                        <li>Dangote: 234</li>
+                        <li>Laverage: 121</li>
+                    </ul>
+                </div><br><br>
+                <div class="recent">
+                    <br><br>
+                    <p>CUSTOMERS ARCHIVEMENTS</p>
+                    <hr>
+                    <ul>
+                        <li>Higest Advance</li>
+                        <li>Highest outstanding</li>
+                        <li>Highest Paid</li>
+                        <li>Most Frequent</li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div> -->
+    </div>
+
+
+    <!--- footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <br>
+                    <h3>HEAD OFFICE</h3>
+                    <p>Opposite Bovas Filling Station,</p>
+                    <p>Oke-Panu, Omi-Adio,</p>
+                    <p>Ibadan Nigeria</p>
+                </div>
+                <div class="footer-col-2">
+                    <br>
+                    <h2> C.E.O</h2>
+                    <p>OLARINDE WAHEED AJIBADE</p>
+                </div>
+                <div class="footer-col-3">
+                    <br>
+                    <h3>CONTACT US:</h3>
+                    <ul>
+                        <li>08068989999</li>
+                        <li>08028779541</li>
+                        <li>08050897272</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <br>
+                    <h3>BRANCH OFFICE</h3>
+                    <p>- Alhaji Ajibike Shopping complex, Beside Bovas Filling Station</p>
+                    <p>- Yaa Lateef Filling Station, Along Abeokuta Road, Omi-Adio, Ibadan</p>
+                    <p>- Apooyin Ido Road, Ibadan</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright" style="margin-top: 7px;">Copyright 2023 - JAMAL ENTERPRISE</p>
+        </div>
+    </footer>
+    <!---js for toggle menu--->
+    <script type="text/javascript">
+        var MenuItems = document.getElementById("menu-items");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+        }
+    </script>
+    <!--js for toggle form-->
+    <script type="text/javascript">
+        var LoginForm = document.getElementById("LoginForm");
+        var RegForm = document.getElementById("RegForm");
+        var Indicator = document.getElementById("indicator");
+        var form_container = document.getElementById("form_container");
+        function register() {
+            RegForm.style.transform = "translateX(0px)";
+            LoginForm.style.transform = "translateX(0px)"
+            Indicator.style.transform = "translateX(100px)"
+            form_container.style.height = "550px"
+        }
+        function login() {
+            RegForm.style.transform = "translateX(300px)";
+            LoginForm.style.transform = "translateX(300px)"
+            Indicator.style.transform = "translateX(0px)"
+            form_container.style.height = "300px"
+        }
+    </script>
+</body>

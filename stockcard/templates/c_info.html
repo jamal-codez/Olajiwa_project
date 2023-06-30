@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>OLAJIWA RESOURCE COMPANY </title>
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'logo2.png' %}"></a>
+            </div>
+            <nav>
+                <ul id="menu-items">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'addc' %}">Add Customer</a></li>
+                    <li><a href="{% url 'c_list' %}">All Customers</a></li>
+                    <li><a href="">Update Inventory</a></li>
+
+                    <li>
+                        <div class="logout"><a href="{% url 'logout' %}">logout</a></div>
+                    </li>
+                </ul>
+            </nav>
+            <img src="{% static 'menu.png' %}" class="menu-icon" onclick="menutoggle()" id="toggler">
+        </div>
+    </div>
+    <div class="h_page">
+        <!--<h1>{{info}}</h1><br><br>
+        <p>ID: {{info.id}}</p>
+        <p>NAME: {{info.name}}</p>
+        <p>PHINE NUMBER: {{info.phone_no_1}}</p>
+        <p>ALTERNATIVE NUMBER: {{info.phone_no_2}}</p>
+        <p>EMAIL: {{info.mail}}</p>
+        <p>REGISTRATION DATE: {{info.reg_date}}</p>
+        <p>ADDRESS: {{info.address}}</p>-->
+        <div class="student-profile py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-transparent text-center" style="height: auto;">
+                                <i class="fas fa-user fa-lg"
+                                    style="color: #01060e; font-size: 200px; margin-top: 20px;"></i><br><br><br>
+                                <h3>{{info.name}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0"><strong class="pr-1">Customer ID:</strong>{{info.id}}</p>
+                            </div>
+                        </div>
+                        <a href="{% url 'cstock' info.id %}"><button class="add_btn"> View Stock Card </button></a>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-transparent border-0">
+                                <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                            </div>
+                            <div class="card-body pt-0">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th width="30%">PHONE NUMBER : </th>
+                                        <td width="2%">:</td>
+                                        <td>{{info.phone_no_1}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">ALTERNATIVE NUMBER : </th>
+                                        <td width="2%">:</td>
+                                        <td>{{info.phone_no_2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">EMAIL : </th>
+                                        <td width="2%">:</td>
+                                        <td>{{info.mail}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">REGISTRATION DATE :</th>
+                                        <td width="2%">:</td>
+                                        <td>{{info.reg_date}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">ADDRESS :</th>
+                                        <td width="2%">:</td>
+                                        <td>{{info.address}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="height: 26px"></div>
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-transparent border-0">
+                                <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
+                            </div>
+                            <div class="card-body pt-0">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--- footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <br>
+                    <h3>HEAD OFFICE</h3>
+                    <p>Opposite Bovas Filling Station,</p>
+                    <p>Oke-Panu, Omi-Adio,</p>
+                    <p>Ibadan Nigeria</p>
+                </div>
+                <div class="footer-col-2">
+                    <br>
+                    <h2> C.E.O</h2>
+                    <p>OLARINDE WAHEED AJIBADE</p>
+                </div>
+                <div class="footer-col-3">
+                    <br>
+                    <h3>CONTACT US:</h3>
+                    <ul>
+                        <li>08068989999</li>
+                        <li>08028779541</li>
+                        <li>08050897272</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <br>
+                    <h3>BRANCH OFFICE</h3>
+                    <p>- Alhaji Ajibike Shopping complex, Beside Bovas Filling Station</p>
+                    <p>- Yaa Lateef Filling Station, Along Abeokuta Road, Omi-Adio, Ibadan</p>
+                    <p>- Apooyin Ido Road, Ibadan</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright" style="margin-top: 7px;">Copyright 2023 - JAMAL ENTERPRISE</p>
+        </div>
+    </footer>
+    <!---js for toggle menu--->
+    <script type="text/javascript">
+        var MenuItems = document.getElementById("menu-items");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+        }
+    </script>
+</body>
