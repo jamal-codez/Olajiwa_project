@@ -16,4 +16,5 @@ urlpatterns = [
     path('cstock/<int:pk>/', views.cstock, name='cstock'),
     path('cstock/<int:pk>/cstock_reg/', views.cstock_reg, name='cstock_reg'),
     path('addc/', views.addc, name='addc'),
+    path('delete_data/<int:pk>/', views.del_rec, name='delete_data')
 ]
