@@ -7,7 +7,7 @@ from unicodedata import name
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect, redirect 
 from django.db.models import Q, Sum
 from .models import *
 from django.contrib.auth.decorators import login_required
@@ -49,7 +49,18 @@ def addc(request):
         return HttpResponse(f.render(con,request))
 
     
-
+@login_required
+def del_rec(request,pk,pc):
+    dl=Stock_card.objects.get(pk=pk)
+    g=Customers.objects.get(id=pc)
+    dl.delete()
+    return redirect('cstock', pk=pc)
+    
+@login_required
+def del_u(request, pk):
+    info=Customers.objects.get(id=pk)
+    info.delete()
+    return redirect('c_list')
 @login_required
 def c_list(request):
     f=loader.get_template("c_list.html")
@@ -135,7 +146,8 @@ def cstock(request,pk):
         'it':it,
         'stat':stat,
         'months':months,
-        'r_months':r_months
+        'r_months':r_months,
+        'pc':pk
     }
     return HttpResponse(f.render(con,request))
 

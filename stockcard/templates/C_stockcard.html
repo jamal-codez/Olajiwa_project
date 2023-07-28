@@ -41,7 +41,7 @@
     <hr>
 
     <div class="c_info">
-        <h1>{{cos.id}} - {{cos.name}} </h1>
+        <h1><a href="{% url 'c_info' cos.id %}">{{cos.id}} - {{cos.name}} </a></h1>
     </div>
     <div class="s_card">
         <h3>STOCK CARD</h3>
@@ -84,7 +84,8 @@
                     <td>N {{x.outstanding|f_price}}</td>
                     <td>N {{x.total_p|f_price}}</td>
                     <td>{{x.means_of_Pay}}</td>
-                    <td>{{x.pk}}</td>
+                    <td><a href="{% url 'delete_data' x.pk pc %}"><i class="fa fa-trash" aria-hidden="true"
+                                style="color: red; font-size: 30px;"></i></a></td>
                 </tr>
                 {% endif %}
                 {% endfor %}
